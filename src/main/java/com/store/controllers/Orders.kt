@@ -2,12 +2,10 @@ package com.store.controllers
 
 import com.store.model.DB
 import com.store.model.Order
-import com.store.model.notValid
 import com.store.model.validateAuthToken
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.HttpClientErrorException
 
 @RestController
 class Orders {
@@ -23,10 +21,10 @@ class Orders {
     fun get(@PathVariable("id") id: Int) = DB.getOrder(id)
 
     @DeleteMapping("/orders/{id}")
-    fun delete(@PathVariable("id") id: Int, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<String> {
+    fun cancel(@PathVariable("id") id: Int, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<String> {
         validateAuthToken(header)
 
-        DB.deleteOrder(id)
+        DB.cancelOrder(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 
