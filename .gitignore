@@ -1,0 +1,6 @@
+target/*
+.DS_Store
+lib/*
+*.iml
+*.idea
+.qontract/*
