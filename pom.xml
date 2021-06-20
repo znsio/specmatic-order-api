@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.store</groupId>
-    <artifactId>order-api</artifactId>
+    <artifactId>specmatic-order-api</artifactId>
     <version>1.0</version>
 
     <properties>
