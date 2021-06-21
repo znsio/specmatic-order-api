@@ -32,13 +32,8 @@ object DB {
 
     fun getOrder(id: Int) = ORDERS.first { it.id == id }
 
-    fun cancelOrder(id: Int) {
-        val order = ORDERS.find { it.id == id }
-        if(order != null) {
-            val newOrder = order.copy(status = "cancelled")
-            ORDERS.removeIf { it.id == id }
-            ORDERS.add(newOrder)
-        }
+    fun deleteOrder(id: Int) {
+        ORDERS.removeIf { it.id == id }
     }
 
     fun findOrders(status: String?, productid: Int?) = ORDERS.filter { it.status == status || it.productid == productid }
