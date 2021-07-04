@@ -1,6 +1,7 @@
 package com.store.controllers
 
 import com.store.model.DB
+import com.store.model.Id
 import com.store.model.Product
 import com.store.model.validateAuthToken
 import org.springframework.http.HttpStatus
@@ -21,11 +22,11 @@ class Products {
     fun get(@PathVariable("id") id: Int) = DB.findProduct(id)
 
     @PostMapping("/products")
-    fun create(@RequestBody newProduct: Product, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Int> {
+    fun create(@RequestBody newProduct: Product, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Id> {
         validateAuthToken(header)
 
         DB.addProduct(newProduct)
-        return ResponseEntity(newProduct.id, HttpStatus.CREATED)
+        return ResponseEntity(Id(newProduct.id), HttpStatus.CREATED)
     }
 
     @DeleteMapping("/products/{id}")
@@ -40,5 +41,5 @@ class Products {
     @GetMapping("/products")
     fun search(@RequestParam(name="name", required=false) name: String?,
                @RequestParam(name="type", required=false) type: String?,
-               @RequestParam(name="status", required=false) status: String?) = DB.findProducts(name, type, status)
+               @RequestParam(name="status", required=false) status: String?): List<Product> = DB.findProducts(name, type, status)
 }

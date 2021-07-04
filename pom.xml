@@ -9,9 +9,9 @@
     <version>1.0</version>
 
     <properties>
-        <kotlin.version>1.5.10</kotlin.version>
+        <kotlin.version>1.5.20</kotlin.version>
         <maven.compiler>1.8</maven.compiler>
-        <specmatic.version>0.28.1</specmatic.version>
+        <specmatic.version>0.28.4</specmatic.version>
     </properties>
 
     <dependencies>

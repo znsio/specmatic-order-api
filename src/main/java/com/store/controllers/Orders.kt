@@ -1,9 +1,6 @@
 package com.store.controllers
 
-import com.store.model.DB
-import com.store.model.Order
-import com.store.model.notValid
-import com.store.model.validateAuthToken
+import com.store.model.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,11 +9,13 @@ import org.springframework.web.client.HttpClientErrorException
 @RestController
 class Orders {
     @PostMapping("/orders")
-    fun add(@RequestBody order: Order, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Int> {
+    fun create(@RequestBody order: Order, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Id> {
         validateAuthToken(header)
 
+        DB.reserveProductInventory(order.productid, order.count)
         DB.addOrder(order)
-        return ResponseEntity(order.id, HttpStatus.CREATED)
+
+        return ResponseEntity(Id(order.id), HttpStatus.CREATED)
     }
 
     @GetMapping("/orders/{id}")
@@ -40,5 +39,5 @@ class Orders {
 
     @GetMapping("/orders")
     fun search(@RequestParam(name="status", required=false) status: String?,
-               @RequestParam(name="productid", required=false) productid: Int?) = DB.findOrders(status, productid)
+               @RequestParam(name="productid", required=false) productid: Int?): List<Order> = DB.findOrders(status, productid)
 }
