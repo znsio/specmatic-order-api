@@ -2,10 +2,8 @@
 
 ![HTML client talks to client API which talks to backend api](specmatic-sample-architecture.svg)
 
-This project contains a small website UI, and an accompanying BFF (backend for frontend).
+This project contains the product API, which is used by a small [ecommerce client application]((https://github.com/znsio/specmatic-order-ui).
 
-The BFF talks to the [backend API](https://github.com/znsio/specmatic-order-api).
-
-Here is the [contract](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v1.yaml) governing the interaction of the BFF with the backend API.
+Here is the [contract](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v1.yaml) governing the interaction of the client with the product API.
 
 The architecture diagram was created using the amazing free online SVG editor at [Vectr](https://vectr.com).
