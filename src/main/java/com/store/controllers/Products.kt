@@ -41,5 +41,12 @@ class Products {
     @GetMapping("/products")
     fun search(@RequestParam(name="name", required=false) name: String?,
                @RequestParam(name="type", required=false) type: String?,
-               @RequestParam(name="status", required=false) status: String?): List<Product> = DB.findProducts(name, type, status)
+               @RequestParam(name="status", required=false) status: String?): ResponseEntity<List<Product>> {
+
+        val products = DB.findProducts(name, type, status)
+        if(products.isEmpty())
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+
+        return ResponseEntity(products, HttpStatus.OK)
+   }
 }
