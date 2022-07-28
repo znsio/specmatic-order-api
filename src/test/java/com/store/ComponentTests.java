@@ -1,27 +1,30 @@
 package com.store;
 
-import in.specmatic.test.SpecmaticJUnitSupport;
+import com.intuit.karate.junit5.Karate;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class ContractTests extends SpecmaticJUnitSupport {
+public class ComponentTests {
     private static ConfigurableApplicationContext context;
 
     @BeforeAll
-    public static void setUp() {
-        System.setProperty("host", "localhost");
-        System.setProperty("port", "8080");
-
-        System.setProperty("environment", "staging");
-
+    public static void setUp() throws InterruptedException {
+        Thread.sleep(1000);
         context = SpringApplication.run(Application.class);
+    }
+
+    @Karate.Test
+    Karate runTests() {
+        return new Karate().path("classpath:com/store/componentTests.feature");
     }
 
     @AfterAll
     public static void tearDown() {
-        SpringApplication.exit(context, () -> 0);
-//        context.close();
+        if(context != null) {
+            SpringApplication.exit(context, () -> 0);
+            context.close();
+        }
     }
 }
