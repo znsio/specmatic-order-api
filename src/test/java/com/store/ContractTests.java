@@ -16,6 +16,8 @@ public class ContractTests extends SpecmaticJUnitSupport {
 
         System.setProperty("environment", "staging");
 
+        System.setProperty("ENABLE_NEGATIVE_TESTING", "true");
+
         context = SpringApplication.run(Application.class);
     }
 
