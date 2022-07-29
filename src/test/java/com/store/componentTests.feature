@@ -1,4 +1,4 @@
-Feature: Product API Tests
+Feature: Componen Tests
   Scenario: Search for products of type gadget
     Given url "http://localhost:8080/products?type=gadget"
     When method get
