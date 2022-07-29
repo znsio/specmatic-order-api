@@ -1,30 +1,22 @@
 package com.store;
 
 import com.intuit.karate.junit5.Karate;
-import org.junit.jupiter.api.AfterAll;
+import com.store.model.DB;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class WorkflowTests {
-    private static ConfigurableApplicationContext context;
-
     @BeforeAll
-    public static void setUp() throws InterruptedException {
-        Thread.sleep(1000);
-        context = SpringApplication.run(Application.class);
+    public static void setup() {
+        DB.INSTANCE.initializeTestData();
     }
 
     @Karate.Test
     Karate runTests() {
         return new Karate().path("classpath:com/store/workflowTests.feature");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        if(context != null) {
-            SpringApplication.exit(context, () -> 0);
-            context.close();
-        }
     }
 }
