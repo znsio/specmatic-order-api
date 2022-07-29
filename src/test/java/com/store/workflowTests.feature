@@ -1,5 +1,5 @@
-Feature:
-  Scenario:
+Feature: Workflow Tests
+  Scenario: Delete the first order
     Given url "http://localhost:8080/orders?status=pending"
     When method get
     Then status 200
