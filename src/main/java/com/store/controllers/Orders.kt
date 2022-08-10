@@ -5,11 +5,12 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.HttpClientErrorException
+import javax.validation.Valid
 
 @RestController
 class Orders {
     @PostMapping("/orders")
-    fun create(@RequestBody order: Order, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Id> {
+    fun create( @Valid @RequestBody order: Order, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Id> {
         validateAuthToken(header)
 
         DB.reserveProductInventory(order.productid, order.count)

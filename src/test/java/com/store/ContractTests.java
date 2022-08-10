@@ -19,6 +19,6 @@ public class ContractTests extends SpecmaticJUnitSupport {
 
         DB.INSTANCE.initializeTestData();
 
-//        System.setProperty("ENABLE_NEGATIVE_TESTING", "true");
+        System.setProperty("ENABLE_NEGATIVE_TESTING", "true");
     }
 }
