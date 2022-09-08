@@ -1,6 +1,7 @@
 package com.store;
 
 import com.intuit.karate.junit5.Karate;
+import com.store.model.DB;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,8 @@ public class WorkflowTests {
 
     @BeforeAll
     public static void setUp() throws InterruptedException {
+        DB.INSTANCE.resetDB();
+
         Thread.sleep(1000);
         context = SpringApplication.run(Application.class);
     }

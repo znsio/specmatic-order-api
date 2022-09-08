@@ -1,8 +1,13 @@
 package com.store.model
 
 object DB {
-    private val PRODUCTS: MutableMap<Int, Product> = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
-    private val ORDERS: MutableMap<Int, Order> = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
+    private var PRODUCTS: MutableMap<Int, Product> = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+    private var ORDERS: MutableMap<Int, Order> = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
+
+    fun resetDB() {
+        PRODUCTS = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+        ORDERS = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
+    }
 
     fun addProduct(product: Product) {
         PRODUCTS[product.id] = product

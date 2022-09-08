@@ -9,4 +9,4 @@ Feature:
     Given url "http://localhost:8080/orders/" + id
     When header Authenticate = "abc123"
     And method delete
-    Then status 204
+    Then status 200

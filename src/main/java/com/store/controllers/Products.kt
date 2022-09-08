@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class Products {
     @PostMapping("/products/{id}")
-    fun update(@PathVariable id: Int, @RequestBody product: Product, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<String> {
+    fun update(@PathVariable id: Int, @RequestBody product: Product, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
         validateAuthToken(header)
 
         DB.updateProduct(product)
-        return ResponseEntity(HttpStatus.NO_CONTENT)
+        return ResponseEntity(HttpStatus.OK)
     }
 
     @GetMapping("/products/{id}")
     fun get(@PathVariable("id") id: Int) = DB.findProduct(id)
 
     @PostMapping("/products")
-    fun create(@RequestBody newProduct: Product, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<Id> {
+    fun create(@RequestBody newProduct: Product, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<Id> {
         validateAuthToken(header)
 
         DB.addProduct(newProduct)
-        return ResponseEntity(Id(newProduct.id), HttpStatus.CREATED)
+        return ResponseEntity(Id(newProduct.id), HttpStatus.OK)
     }
 
     @DeleteMapping("/products/{id}")
-    fun delete(@PathVariable("id") id: Int, @RequestHeader("Authenticate", required = true) header: String): ResponseEntity<String> {
+    fun delete(@PathVariable("id") id: Int, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
         validateAuthToken(header)
 
         DB.deletePet(id)
 
-        return ResponseEntity(HttpStatus.NO_CONTENT)
+        return ResponseEntity(HttpStatus.OK)
     }
 
     @GetMapping("/products")

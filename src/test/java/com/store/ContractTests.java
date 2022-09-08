@@ -1,5 +1,6 @@
 package com.store;
 
+import com.store.model.DB;
 import in.specmatic.test.SpecmaticJUnitSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,6 +16,8 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("port", "8080");
 
         System.setProperty("environment", "staging");
+
+        DB.INSTANCE.resetDB();
 
         context = SpringApplication.run(Application.class);
     }
