@@ -43,6 +43,10 @@ class Products {
                @RequestParam(name="type", required=false) type: String?,
                @RequestParam(name="status", required=false) status: String?): ResponseEntity<List<Product>> {
 
+        // An exception thrown by some internal bug...
+        if(name == "unknown")
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+
         val products = DB.findProducts(name, type, status)
         if(products.isEmpty())
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
