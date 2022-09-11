@@ -24,7 +24,6 @@ public class ContractTests extends SpecmaticJUnitSupport {
 
     @AfterAll
     public static void tearDown() {
-        SpringApplication.exit(context, () -> 0);
-//        context.close();
+        context.close();
     }
 }
