@@ -16,6 +16,7 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("port", "8080");
 
         System.setProperty("environment", "staging");
+        System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
 
         DB.INSTANCE.resetDB();
 

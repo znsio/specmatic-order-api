@@ -6,12 +6,15 @@ import com.store.model.Product
 import com.store.model.validateAuthToken
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
-class Products {
+open class Products {
     @PostMapping("/products/{id}")
-    fun update(@PathVariable id: Int, @RequestBody product: Product, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
+    @Validated
+    fun update(@PathVariable id: Int, @Valid @RequestBody product: Product, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
         validateAuthToken(header)
 
         DB.updateProduct(product)
