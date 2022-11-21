@@ -3,15 +3,13 @@ package com.store.controllers
 import com.store.model.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.HttpClientErrorException
 
 @RestController
 class Orders {
     @PostMapping("/orders")
-    fun create(@RequestBody order: Order, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<Id> {
-        validateAuthToken(header)
-
+    fun create(@RequestBody order: Order,  @AuthenticationPrincipal user: User): ResponseEntity<Id> {
         DB.reserveProductInventory(order.productid, order.count)
         DB.addOrder(order)
 
@@ -22,17 +20,13 @@ class Orders {
     fun get(@PathVariable("id") id: Int) = DB.getOrder(id)
 
     @DeleteMapping("/orders/{id}")
-    fun delete(@PathVariable("id") id: Int, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
-        validateAuthToken(header)
-
+    fun delete(@PathVariable("id") id: Int,  @AuthenticationPrincipal user: User): ResponseEntity<String> {
         DB.deleteOrder(id)
         return ResponseEntity(HttpStatus.OK)
     }
 
     @PostMapping("/orders/{id}")
-    fun update(@PathVariable("id") id: Int, @RequestBody status: Order, @RequestHeader("Authenticate", defaultValue = "") header: String): ResponseEntity<String> {
-        validateAuthToken(header)
-
+    fun update(@PathVariable("id") id: Int, @RequestBody status: Order,  @AuthenticationPrincipal user: User): ResponseEntity<String> {
         DB.updateOrder(status)
         return ResponseEntity(HttpStatus.OK)
     }
