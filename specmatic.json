@@ -7,16 +7,5 @@
         "in/specmatic/examples/store/api_order_v1.yaml"
       ]
     }
-  ],
-  "environments": {
-    "staging": {
-      "baseurls": {
-        "auth.spec": "http://localhost:8080"
-      },
-      "variables": {
-        "username": "jackie",
-        "password": "PaSsWoRd"
-      }
-    }
-  }
+  ]
 }
