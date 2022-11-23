@@ -20,7 +20,7 @@ object DB {
         PRODUCTS[update.id] = PRODUCTS.getValue(update.id).newProduct(update.name, update.type, update.inventory)
     }
 
-    fun deletePet(id: Int) { PRODUCTS.remove(id) }
+    fun deleteProduct(id: Int) { PRODUCTS.remove(id) }
 
     fun findProducts(name: String?, type: String?, status: String?): List<Product> {
         return PRODUCTS.filter { (id, product) ->

@@ -35,7 +35,7 @@ open class Products {
 
     @DeleteMapping("/products/{id}")
     fun delete(@PathVariable("id") id: Int, @AuthenticationPrincipal user: User): ResponseEntity<String> {
-        DB.deletePet(id)
+        DB.deleteProduct(id)
 
         return ResponseEntity(HttpStatus.OK)
     }
