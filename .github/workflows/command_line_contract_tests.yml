@@ -18,15 +18,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build springboot application
-      working-directory: main
-      run: mvn package
     - name: Run springboot application
       working-directory: main
-      run: mvn spring-boot:run &
-    - name: Wait for springboot application to start
-      run: sleep 2s
-      shell: bash
+      run: mvn spring-boot:run
     - name: Run contract as tests with Specmatic
       working-directory: main
       #ideally specmatic jar file can be downloaded on the fly, checking it in to avoid repeated downloads
