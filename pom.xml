@@ -110,20 +110,6 @@
             <version>3.8.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>in.specmatic</groupId>
-            <artifactId>specmatic-core</artifactId>
-            <version>${specmatic.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>in.specmatic</groupId>
-            <artifactId>junit5-support</artifactId>
-            <version>${specmatic.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
