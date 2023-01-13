@@ -30,4 +30,4 @@ jobs:
     - name: Run contract as tests with Specmatic
       working-directory: main
       #ideally specmatic jar file can be downloaded on the fly, checking it in to avoid repeated downloads
-      run: java -jar ./tools/specmatic.jar test
+      run: java -jar ./tools/specmatic.jar test --port 8080
