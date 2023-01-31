@@ -21,10 +21,11 @@ jobs:
     - name: Wait for springboot application to start
       run: sleep 30s
       shell: bash
-    - name: Run Specmatic contract as test
+    - name: Setup specmatic
       uses: airslate-oss/setup-specmatic@v1
       with:
         specmatic-version: 0.59.0
+    - name: Run Specmatic contract as test
       run: specmatic test --port 8080 --junitReportDir contract-test-reports
     - name: Publish contract test report
       uses: mikepenz/action-junit-report@v3
