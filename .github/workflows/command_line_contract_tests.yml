@@ -1,11 +1,8 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Java CI with contracts run through command line
 
 on:
   push:
-    branches: [ command_line_contract_tests ]
+    branches: [ github-actions-setup-specmatic ]
 
 jobs:
   build:
@@ -24,10 +21,11 @@ jobs:
     - name: Wait for springboot application to start
       run: sleep 30s
       shell: bash
-    - name: Run contract as tests with Specmatic
-      working-directory: main
-      #ideally specmatic jar file can be downloaded on the fly, checking it in to avoid repeated downloads
-      run: java -jar ./tools/specmatic.jar test --port 8080 --junitReportDir contract-test-reports
+    - name: Run Specmatic contract as test
+      uses: airslate-oss/setup-specmatic@v1
+      with:
+        specmatic-version: 0.59.0
+      run: specmatic test --port 8080 --junitReportDir contract-test-reports
     - name: Publish contract test report
       uses: mikepenz/action-junit-report@v3
       if: always()
