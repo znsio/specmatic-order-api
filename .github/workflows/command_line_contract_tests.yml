@@ -27,7 +27,7 @@ jobs:
         specmatic-version: 0.59.0
     - name: Run Specmatic contract as test
       working-directory: ./main
-      run: ls -l && specmatic test --port 8080 --junitReportDir contract-test-reports
+      run: specmatic test --port 8080 --junitReportDir contract-test-reports
     - name: Publish contract test report
       uses: mikepenz/action-junit-report@v3
       if: always()
