@@ -31,4 +31,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: jacoco coverage report
-        path: target/site/jacoco
+        path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
