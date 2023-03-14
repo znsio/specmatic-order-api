@@ -15,6 +15,8 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("host", "localhost");
         System.setProperty("port", "8080");
 
+        System.setProperty("endpointsAPI", "http://localhost:8080/actuator/mappings");
+
 //        System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
 
         DB.INSTANCE.resetDB();

@@ -11,11 +11,16 @@
     <properties>
         <kotlin.version>1.7.20</kotlin.version>
         <maven.compiler>1.8</maven.compiler>
-        <specmatic.version>0.62.0</specmatic.version>
+        <specmatic.version>0.63.0</specmatic.version>
         <spring.boot.version>2.7.5</spring.boot.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>2.7.5</version>
+        </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
