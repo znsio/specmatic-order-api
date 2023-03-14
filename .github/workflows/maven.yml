@@ -28,7 +28,7 @@ jobs:
       working-directory: main
       run: mvn test package
     - name: Upload artifact
-      uses: actions/upload-artifact@v2.1.4
+      uses: actions/upload-artifact@v3
       with:
-        name: Petstore executable fat jar
-        path: target/petstore-1.0-jar-with-dependencies.jar
+        name: jacoco coverage report
+        path: target/site/jacoco
