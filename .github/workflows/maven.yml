@@ -26,7 +26,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       working-directory: main
-      run: mvn test package
+      run: mvn test package jacoco:report
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
