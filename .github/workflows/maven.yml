@@ -27,8 +27,14 @@ jobs:
     - name: Build with Maven
       working-directory: main
       run: mvn test package jacoco:report
+    - name: Generate JaCoCo Badge
+      uses: cicirello/jacoco-badge-generator@v2
+    - name: Log coverage percentage
+      run: |
+        echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+        echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: jacoco coverage report
-        path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco/index.html
+        path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
