@@ -17,7 +17,10 @@ object DB {
     fun findProduct(id: Int): Product = PRODUCTS.getValue(id)
 
     fun updateProduct(update: Product) {
-        PRODUCTS[update.id] = PRODUCTS.getValue(update.id).newProduct(update.name, update.type, update.inventory)
+        PRODUCTS[update.id] = run {
+            PRODUCTS.getValue(update.id)
+            Product(update.name, update.type, update.inventory)
+        }
     }
 
     fun deleteProduct(id: Int) { PRODUCTS.remove(id) }

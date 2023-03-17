@@ -243,7 +243,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/DB.java</exclude>
+                        <exclude>**/DB.*</exclude>
+                        <exclude>**/APIKeyAuthFilter.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

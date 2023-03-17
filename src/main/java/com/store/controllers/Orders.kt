@@ -1,11 +1,13 @@
 package com.store.controllers
 
+import com.store.exceptions.NotFoundException
 import com.store.exceptions.ValidationException
 import com.store.model.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import java.util.NoSuchElementException
 import javax.validation.Valid
 
 @RestController
@@ -19,7 +21,13 @@ class Orders {
     }
 
     @GetMapping("/orders/{id}")
-    fun get(@PathVariable("id") id: Int) = DB.getOrder(id)
+    fun get(@PathVariable("id") id: Int): Order {
+        try {
+            return DB.getOrder(id)
+        } catch (e: NoSuchElementException) {
+            throw NotFoundException(e.message!!)
+        }
+    }
 
     @DeleteMapping("/orders/{id}")
     fun delete(@PathVariable("id") id: Int,  @AuthenticationPrincipal user: User): ResponseEntity<String> {
