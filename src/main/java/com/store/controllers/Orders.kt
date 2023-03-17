@@ -1,15 +1,17 @@
 package com.store.controllers
 
+import com.store.exceptions.ValidationException
 import com.store.model.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 class Orders {
     @PostMapping("/orders")
-    fun create(@RequestBody order: Order,  @AuthenticationPrincipal user: User): ResponseEntity<Id> {
+    fun create(@Valid @RequestBody order: Order,  @AuthenticationPrincipal user: User): ResponseEntity<Id> {
         DB.reserveProductInventory(order.productid, order.count)
         DB.addOrder(order)
 
@@ -26,8 +28,11 @@ class Orders {
     }
 
     @PostMapping("/orders/{id}")
-    fun update(@PathVariable("id") id: Int, @RequestBody status: Order,  @AuthenticationPrincipal user: User): ResponseEntity<String> {
-        DB.updateOrder(status)
+    fun update(@PathVariable("id") id: Int, @Valid @RequestBody order: Order, @AuthenticationPrincipal user: User): ResponseEntity<String> {
+        if(order.id == 0)
+            throw ValidationException("Product id cannot be null")
+
+        DB.updateOrder(order)
         return ResponseEntity(HttpStatus.OK)
     }
 

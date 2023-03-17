@@ -1,5 +1,6 @@
 package com.store.controllers
 
+import com.store.exceptions.ValidationException
 import com.store.model.DB
 import com.store.model.Id
 import com.store.model.Product
@@ -20,6 +21,9 @@ open class Products {
         @Valid @RequestBody product: Product,
         @AuthenticationPrincipal user: User
     ): ResponseEntity<String> {
+        if(product.id == 0)
+            throw ValidationException("Product id cannot be null")
+
         DB.updateProduct(product)
         return ResponseEntity(HttpStatus.OK)
     }
@@ -28,7 +32,7 @@ open class Products {
     fun get(@PathVariable("id") id: Int) = DB.findProduct(id)
 
     @PostMapping("/products")
-    fun create(@RequestBody newProduct: Product, @AuthenticationPrincipal user: User): ResponseEntity<Id> {
+    fun create(@Valid @RequestBody newProduct: Product, @AuthenticationPrincipal user: User): ResponseEntity<Id> {
         DB.addProduct(newProduct)
         return ResponseEntity(Id(newProduct.id), HttpStatus.OK)
     }
