@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class ComponentTests {
+public class WorkflowTest {
     private static ConfigurableApplicationContext context;
 
     @BeforeAll
@@ -20,7 +20,7 @@ public class ComponentTests {
 
     @Karate.Test
     Karate runTests() {
-        return new Karate().path("classpath:com/store/componentTests.feature");
+        return new Karate().path("classpath:com/store/workflowTest.feature");
     }
 
     @AfterAll
